@@ -3,4 +3,4 @@ jdk:
   - openjdk11
 
 script:
-  - mvn test -B
+  - mvn test -Denvironment=test
