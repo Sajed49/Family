@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.sajed.service.AddressServiceTest
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.79 s - in com.sajed.service.AddressServiceTest
