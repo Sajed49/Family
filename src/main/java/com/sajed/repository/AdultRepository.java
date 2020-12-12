@@ -11,5 +11,5 @@ public interface AdultRepository extends JpaRepository<Adult, Long> {
 
     List<Adult> findByIsDeletedFalse();
 
-    Adult findByAdultId(Integer adultId);
+    Adult findByAdultIdAndIsDeletedFalse(Integer adultId);
 }

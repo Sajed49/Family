@@ -11,11 +11,11 @@ public class AddressService {
     @Autowired
     private AddressRepository addressRepository;
 
-    public Address findByAddressIdAndIsDeleted(Integer addressId, Boolean isDeleted){
-        return addressRepository.findByAddressIdAndIsDeleted( addressId, isDeleted );
+    public Address findByAddressIdAndIsDeletedFalse(Integer addressId) {
+        return addressRepository.findByAddressIdAndIsDeletedFalse(addressId);
     }
 
-    public Address save( Address address ) {
-        return addressRepository.save( address );
+    public Address save(Address address) {
+        return addressRepository.save(address);
     }
 }

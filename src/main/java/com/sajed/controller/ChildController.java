@@ -1,9 +1,10 @@
 package com.sajed.controller;
 
 import com.sajed.constants.IConstants;
+import com.sajed.models.Adult;
 import com.sajed.models.Child;
 import com.sajed.models.ResponseModel;
-import com.sajed.repository.AdultRepository;
+import com.sajed.service.AdultService;
 import com.sajed.service.ChildService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
@@ -20,6 +21,8 @@ public class ChildController implements IConstants {
     @Autowired
     ChildService childService;
 
+    @Autowired
+    AdultService adultService;
 
     /**
      * Fetches all entries of child table. <p>
@@ -35,7 +38,7 @@ public class ChildController implements IConstants {
         log.log(Level.TRACE, "Call: View - Child");
         try {
             List<Child> adultList = childService.findByIsDeletedFalse();
-            return convertToJSON(SUCCESS_STATUS, MESSAGE_SUCCESS, adultList);
+            return convertToJSON(SUCCESS_STATUS, MESSAGE_FETCH_SUCCESS, adultList);
         } catch (Exception e) {
             log.log(Level.ERROR, e);
             return convertToJSON(FAILED_STATUS, MESSAGE_ERROR, null);
@@ -59,10 +62,14 @@ public class ChildController implements IConstants {
         log.log(Level.TRACE, "Call: Create - Child");
         try {
             this.cleanError(child);
+            Adult parent = adultService.findByAdultIdAndIsDeletedFalse( child.getAdult().getAdultId() );
+            if( parent == null ) return convertToJSON(FAILED_STATUS, MESSAGE_PARENT_NOT_FOUND, null);
+
+            child.setAdult( parent );
             child.setIsDeleted(false);
             Child created = childService.save(child);
 
-            return convertToJSON(SUCCESS_STATUS, MESSAGE_SUCCESS, created);
+            return convertToJSON(SUCCESS_STATUS, MESSAGE_ADD_SUCCESS, created);
         } catch (Exception e) {
             log.log(Level.ERROR, e);
             return convertToJSON(FAILED_STATUS, MESSAGE_ERROR, null);
@@ -85,8 +92,13 @@ public class ChildController implements IConstants {
         log.log(Level.TRACE, "Call: Update - Child");
         try {
             this.cleanError(child);
-            childService.save(child);
-            return convertToJSON(SUCCESS_STATUS, MESSAGE_SUCCESS, child);
+            Adult parent = adultService.findByAdultIdAndIsDeletedFalse( child.getAdult().getAdultId() );
+            if( parent == null ) return convertToJSON(FAILED_STATUS, MESSAGE_PARENT_NOT_FOUND, null);
+
+            child.setIsDeleted( false );
+            child = childService.save(child);
+
+            return convertToJSON(SUCCESS_STATUS, MESSAGE_UPDATE_SUCCESS, child);
         } catch (Exception e) {
             log.log(Level.ERROR, e);
             return convertToJSON(FAILED_STATUS, MESSAGE_ERROR, null);
@@ -113,7 +125,7 @@ public class ChildController implements IConstants {
             child.setIsDeleted(true);
             childService.save(child);
 
-            return convertToJSON(SUCCESS_STATUS, MESSAGE_SUCCESS, child);
+            return convertToJSON(SUCCESS_STATUS, MESSAGE_DELETE_SUCCESS, child);
         } catch (Exception e) {
             log.log(Level.ERROR, e);
             return convertToJSON(FAILED_STATUS, MESSAGE_ERROR, null);

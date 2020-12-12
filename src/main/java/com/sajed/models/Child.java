@@ -18,4 +18,14 @@ public class Child {
     private String firstName;
     private String lastName;
     private Boolean isDeleted;
+
+    public Child() {
+        this.adult = new Adult();
+    }
+
+    public Child(String firstName) {
+        this.adult = new Adult();
+        this.firstName = firstName;
+        this.setIsDeleted(false);
+    }
 }

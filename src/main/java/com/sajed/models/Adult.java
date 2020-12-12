@@ -19,4 +19,14 @@ public class Adult {
     @JoinColumn(name = "addressId")
     private Address address;
 
+    public Adult() {
+        this.address = new Address();
+    }
+
+    public Adult(String firstName) {
+        this.address = new Address();
+        this.firstName = firstName;
+        this.isDeleted = false;
+    }
+
 }

@@ -1,0 +1,6 @@
+cd Family/
+mvn clean package
+cd target/
+
+sudo docker network create family-mysql
+sudo docker container run --name family-mysql --network family-mysql -e MYSQL_ROOT_PASSWORD=Archi@49 -e MYSQL_DATABASE=familyDB -d mysql:latest

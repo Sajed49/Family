@@ -3,9 +3,6 @@ package com.sajed.controller;
 import com.sajed.constants.IConstants;
 import com.sajed.models.Adult;
 import com.sajed.models.ResponseModel;
-import com.sajed.repository.AddressRepository;
-import com.sajed.repository.AdultRepository;
-import com.sajed.service.AddressService;
 import com.sajed.service.AdultService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
@@ -23,9 +20,6 @@ public class AdultController implements IConstants {
     @Autowired
     AdultService adultService;
 
-    @Autowired
-    AddressService addressService;
-
     /**
      * Fetches all entries of adult table. <p>
      *
@@ -40,7 +34,7 @@ public class AdultController implements IConstants {
         log.log(Level.TRACE, "Call: View - Adult");
         try {
             List<Adult> adultList = adultService.findByIsDeletedFalse();
-            return convertToJSON(SUCCESS_STATUS, MESSAGE_SUCCESS, adultList);
+            return convertToJSON(SUCCESS_STATUS, MESSAGE_FETCH_SUCCESS, adultList);
         } catch (Exception e) {
             log.log(Level.ERROR, e);
             return convertToJSON(FAILED_STATUS, MESSAGE_ERROR, null);
@@ -66,7 +60,7 @@ public class AdultController implements IConstants {
             adult.getAddress().setIsDeleted(false);
             adultService.save(adult);
 
-            return convertToJSON(SUCCESS_STATUS, MESSAGE_SUCCESS, adult);
+            return convertToJSON(SUCCESS_STATUS, MESSAGE_ADD_SUCCESS, adult);
         } catch (Exception e) {
             log.log(Level.ERROR, e);
             return convertToJSON(FAILED_STATUS, MESSAGE_ERROR, null);
@@ -88,8 +82,11 @@ public class AdultController implements IConstants {
 
         log.log(Level.TRACE, "Call: Update - Adult");
         try {
+            adult.setIsDeleted( false );
+            adult.getAddress().setIsDeleted( false );
             adultService.save(adult);
-            return convertToJSON(SUCCESS_STATUS, MESSAGE_SUCCESS, adult);
+
+            return convertToJSON(SUCCESS_STATUS, MESSAGE_UPDATE_SUCCESS, adult);
         } catch (Exception e) {
             log.log(Level.ERROR, e);
             return convertToJSON(FAILED_STATUS, MESSAGE_ERROR, null);
@@ -117,7 +114,7 @@ public class AdultController implements IConstants {
             adult.getAddress().setIsDeleted(true);
             adultService.save(adult);
 
-            return convertToJSON(SUCCESS_STATUS, MESSAGE_SUCCESS, adult);
+            return convertToJSON(SUCCESS_STATUS, MESSAGE_DELETE_SUCCESS, adult);
         } catch (Exception e) {
             log.log(Level.ERROR, e);
             return convertToJSON(FAILED_STATUS, MESSAGE_ERROR, null);

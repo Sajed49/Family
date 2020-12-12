@@ -13,11 +13,11 @@ public class ChildService {
     @Autowired
     ChildRepository childRepository;
 
-    public List<Child> findByIsDeletedFalse(){
+    public List<Child> findByIsDeletedFalse() {
         return childRepository.findByIsDeletedFalse();
     }
 
-    public Child save( Child child){
-        return childRepository.save( child );
+    public Child save(Child child) {
+        return childRepository.save(child);
     }
 }
