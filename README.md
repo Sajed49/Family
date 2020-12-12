@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/Sajed49/Family.svg?branch=main)](https://travis-ci.com/Sajed49/Family)
 # Family
 
 An PoC project for web based family information
