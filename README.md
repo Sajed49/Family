@@ -10,7 +10,7 @@
 
 An PoC project for web based family information
 
-##How to run on ubuntu
+## How to run on ubuntu
 1. Open a terminal (ctrl+alt+T)
 2. git clone https://github.com/Sajed49/Family.git
 3. cd Family
