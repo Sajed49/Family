@@ -1,10 +1,16 @@
 [![Build Status](https://travis-ci.com/Sajed49/Family.svg?branch=main)](https://travis-ci.com/Sajed49/Family)
+[![Maintainability](https://api.codeclimate.com/v1/badges/920ee5408d29abb3970c/maintainability)](https://codeclimate.com/github/Sajed49/Family/maintainability)
+[![license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Sajed49/Family)
+[![HitCount](http://hits.dwyl.com/sajed49/Family.svg)](http://hits.dwyl.com/sajed49/Family)
+
+[![Generic badge](https://img.shields.io/badge/Java-11.0-Blue.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Maven-3.6.3-Blue.svg)](https://shields.io/)
+
 # Family
 
 An PoC project for web based family information
 
-##How to run
-###Ubuntu
+##How to run on ubuntu
 1. Open a terminal (ctrl+alt+T)
 2. git clone https://github.com/Sajed49/Family.git
 3. cd Family
